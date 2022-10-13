@@ -1,12 +1,13 @@
-package avans.deeltijd.speedy;
+package avans.deeltijd.speedy.domain;
 
+import avans.deeltijd.speedy.domain.Car;
 import lombok.Getter;
 
 import javax.persistence.Entity;
 import java.time.LocalDate;
 
 @Entity
-public class FCEV extends Car{
+public class FCEV extends Car {
     @Getter
     private final String carType = "Fuel cell electric vehicle";
 

@@ -1,4 +1,4 @@
-package avans.deeltijd.speedy;
+package avans.deeltijd.speedy.domain;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -44,5 +44,9 @@ public abstract class Car {
 
     public void rentCar() {
         this.rentedOut = true;
+    }
+
+    public boolean usesExternal() {
+        return false;
     }
 }

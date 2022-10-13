@@ -1,4 +1,4 @@
-package avans.deeltijd.speedy;
+package avans.deeltijd.speedy.domain;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

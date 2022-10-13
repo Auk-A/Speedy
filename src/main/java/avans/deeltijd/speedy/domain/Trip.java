@@ -1,4 +1,4 @@
-package avans.deeltijd.speedy;
+package avans.deeltijd.speedy.domain;
 
 
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package avans.deeltijd.speedy;
+package avans.deeltijd.speedy.domain;
 
 import lombok.Getter;
 
@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import java.time.LocalDate;
 
 @Entity
-public class ICE extends Car{
+public class ICE extends Car {
     @Getter
     private final String carType = "Internal combustion engine";
     @Getter
