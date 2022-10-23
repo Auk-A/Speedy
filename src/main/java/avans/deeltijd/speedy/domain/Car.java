@@ -68,7 +68,7 @@ public class Car {
         }
     }
 
-    public String getFuelDescription(JSONObject obj) {
+    public static String getFuelDescription(JSONObject obj) {
         String carType = null;
         try {
             switch (obj.getString("brandstof_omschrijving")) {
@@ -87,7 +87,7 @@ public class Car {
         return carType;
     }
 
-    public String getType(String licensePlate) {
+    public static String getType(String licensePlate) {
         String carType = "";
         try {
             String uri = "https://opendata.rdw.nl/resource/8ys7-d773.json?kenteken=" + licensePlate;

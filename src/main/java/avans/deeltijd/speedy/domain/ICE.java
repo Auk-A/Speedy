@@ -21,7 +21,7 @@ public class ICE extends Car {
         super(licensePlate);
     }
 
-    public ICE(Engine engineType) {
+    public void setEngineType() {
         this.engineType = engineType;
     }
 }

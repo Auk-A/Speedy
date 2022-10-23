@@ -29,8 +29,8 @@ public class CarController {
     @PostMapping("/new")
     public ResponseEntity<HttpStatus> createCar(@RequestParam String licensePlate) {
         if (carRepository.findByLicensePlateIgnoringCase(licensePlate).isEmpty()) {
-            Car addedCar = new Car(licensePlate);
-            switch (addedCar.getType(licensePlate)) {
+            Car addedCar;
+            switch (Car.getType(licensePlate)) {
                 case "ICE":
                     addedCar = new ICE(licensePlate);
                     break;
@@ -41,6 +41,7 @@ public class CarController {
                     addedCar = new FCEV(licensePlate);
                     break;
                 default:
+                    addedCar = new Car(licensePlate);
                     break;
             }
             carRepository.save(addedCar);
@@ -48,7 +49,6 @@ public class CarController {
         } else {
             return ResponseEntity.ok(HttpStatus.CONFLICT);
         }
-
     }
 
     // Get all cars by request params
