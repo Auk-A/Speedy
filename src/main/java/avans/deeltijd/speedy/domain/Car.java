@@ -2,6 +2,8 @@ package avans.deeltijd.speedy.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -98,6 +100,9 @@ public class Car {
 
     public static String getType(String licensePlate) throws JSONException {
         JSONArray fuelInfo = getFuelInfo(licensePlate);
+        if(fuelInfo.length() == 0) {
+            return null;
+        }
         String carType = "";
             String type1 = getFuelDescription(fuelInfo.getJSONObject(0));
             String type2 = "";

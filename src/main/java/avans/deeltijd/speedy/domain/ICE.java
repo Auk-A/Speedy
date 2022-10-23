@@ -3,6 +3,7 @@ package avans.deeltijd.speedy.domain;
 import lombok.Getter;
 
 import javax.persistence.Entity;
+
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -16,7 +17,7 @@ public class ICE extends Car {
     @Getter
     private String engineType;
 
-    public ICE(){
+    public ICE() {
     }
 
     public ICE(String licensePlate) throws JSONException {
@@ -28,7 +29,7 @@ public class ICE extends Car {
         JSONArray fuelInfo = Car.getFuelInfo(this.getLicensePlate());
         JSONObject currentFuelInfo = fuelInfo.getJSONObject(0);
         String fuelType = currentFuelInfo.getString("brandstof_omschrijving");
-        if(fuelType.equals("Benzine")){
+        if (fuelType.equals("Benzine")) {
             this.engineType = Engine.PETROL.toString();
         } else this.engineType = Engine.DIESEL.toString();
     }

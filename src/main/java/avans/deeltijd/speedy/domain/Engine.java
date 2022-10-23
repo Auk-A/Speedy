@@ -6,10 +6,13 @@ public enum Engine {
 
     @Override
     public String toString() {
-        switch(this) {
-            case DIESEL: return "Diesel";
-            case PETROL: return "Petrol";
-            default: throw new IllegalArgumentException();
+        switch (this) {
+            case DIESEL:
+                return "Diesel";
+            case PETROL:
+                return "Petrol";
+            default:
+                throw new IllegalArgumentException();
         }
     }
 }

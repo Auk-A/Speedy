@@ -28,10 +28,14 @@ public class CarController {
 
     // Add a new car by license plate
     @PostMapping("/new")
-    public ResponseEntity<HttpStatus> createCar(@RequestParam String licensePlate) throws JSONException {
+    public ResponseEntity createCar(@RequestParam String licensePlate) throws JSONException {
         if (carRepository.findByLicensePlateIgnoringCase(licensePlate).isEmpty()) {
             Car addedCar;
-            switch (Car.getType(licensePlate)) {
+            String carType = Car.getType(licensePlate);
+            if (carType == null) {
+                return new ResponseEntity<>("License plate not found", HttpStatus.CONFLICT);
+            }
+            switch (carType) {
                 case "ICE":
                     addedCar = new ICE(licensePlate);
                     break;
@@ -46,9 +50,9 @@ public class CarController {
                     break;
             }
             carRepository.save(addedCar);
-            return ResponseEntity.ok(HttpStatus.CREATED);
+            return new ResponseEntity<>("New car added", HttpStatus.CREATED);
         } else {
-            return ResponseEntity.ok(HttpStatus.CONFLICT);
+            return new ResponseEntity<>("Car has already been added", HttpStatus.CONFLICT);
         }
     }
 
