@@ -1,6 +1,9 @@
 package avans.deeltijd.speedy.controller;
 
 import avans.deeltijd.speedy.domain.Car;
+import avans.deeltijd.speedy.domain.BEV;
+import avans.deeltijd.speedy.domain.FCEV;
+import avans.deeltijd.speedy.domain.ICE;
 import avans.deeltijd.speedy.repository.CarRepository;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -26,6 +29,8 @@ public class CarController {
     public ResponseEntity<HttpStatus> createCar(@RequestBody Car resultCar) {
         String licensePlate = resultCar.getLicensePlate();
         if (carRepository.findByLicensePlateIgnoringCase(licensePlate).isEmpty()) {
+
+
             Car apiCar = new Car(licensePlate);
             if (apiCar.usesExternal()) {
                 resultCar = new Car(licensePlate);
@@ -110,6 +115,4 @@ public class CarController {
 
         return "Return JSON with car data for car " + carId + ".";
     }
-}
-
 }

@@ -3,24 +3,22 @@ package avans.deeltijd.speedy.domain;
 import lombok.Getter;
 
 import javax.persistence.Entity;
-import java.time.LocalDate;
+import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @Entity
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 public class ICE extends Car {
     @Getter
     private final String carType = "Internal combustion engine";
     @Getter
     private Engine engineType;
 
-    public ICE() {
+    public ICE(){
+        super();
     }
 
     public ICE(Engine engineType) {
-        this.engineType = engineType;
-    }
-
-    public ICE(String licensePlate, String brand, String model, String color, double value, LocalDate dateOfBuild, int paxCapacity, Engine engineType) {
-        super(licensePlate, brand, model, color, value, dateOfBuild, paxCapacity);
         this.engineType = engineType;
     }
 }

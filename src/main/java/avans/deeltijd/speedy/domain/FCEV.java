@@ -1,20 +1,18 @@
 package avans.deeltijd.speedy.domain;
 
-import avans.deeltijd.speedy.domain.Car;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Getter;
 
 import javax.persistence.Entity;
-import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
 public class FCEV extends Car {
     @Getter
     private final String carType = "Fuel cell electric vehicle";
 
     public FCEV() {
-    }
-
-    public FCEV(String licensePlate, String brand, String model, String color, double value, LocalDate dateOfBuild, int paxCapacity) {
-        super(licensePlate, brand, model, color, value, dateOfBuild, paxCapacity);
+        super();
     }
 }
