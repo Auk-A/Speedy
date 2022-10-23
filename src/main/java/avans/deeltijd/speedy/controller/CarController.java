@@ -20,31 +20,30 @@ import java.util.stream.Collectors;
 @RequestMapping("/car")
 public class CarController {
     private final CarRepository carRepository;
+
     public CarController(CarRepository carRepository) {
         this.carRepository = carRepository;
     }
 
     // Add a new car by license plate
     @PostMapping("/new")
-    public ResponseEntity<HttpStatus> createCar(@RequestBody Car resultCar) {
-        String licensePlate = resultCar.getLicensePlate();
+    public ResponseEntity<HttpStatus> createCar(@RequestParam String licensePlate) {
         if (carRepository.findByLicensePlateIgnoringCase(licensePlate).isEmpty()) {
-            Car apiCar = new Car(licensePlate);
-            switch (apiCar.getType(licensePlate)) {
+            Car addedCar = new Car(licensePlate);
+            switch (addedCar.getType(licensePlate)) {
                 case "ICE":
-                    resultCar = new ICE(licensePlate);
+                    addedCar = new ICE(licensePlate);
                     break;
                 case "BEV":
-                    resultCar = new BEV(licensePlate);
+                    addedCar = new BEV(licensePlate);
                     break;
                 case "FCEV":
-                    resultCar = new FCEV(licensePlate);
+                    addedCar = new FCEV(licensePlate);
                     break;
                 default:
-                    resultCar = new Car(licensePlate);
                     break;
             }
-            carRepository.save(resultCar);
+            carRepository.save(addedCar);
             return ResponseEntity.ok(HttpStatus.CREATED);
         } else {
             return ResponseEntity.ok(HttpStatus.CONFLICT);

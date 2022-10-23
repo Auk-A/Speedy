@@ -82,7 +82,8 @@ public class Car {
                     carType = "ICE";
                     break;
             }
-        } catch (JSONException ignored){}
+        } catch (JSONException ignored) {
+        }
         return carType;
     }
 
@@ -96,11 +97,11 @@ public class Car {
             JSONArray fuelInfo = new JSONArray(carInfo);
             String type1 = getFuelDescription(fuelInfo.getJSONObject(0));
             String type2 = "";
-            if(fuelInfo.length() > 1) {
+            if (fuelInfo.length() > 1) {
                 type2 = getFuelDescription(fuelInfo.getJSONObject(1));
             }
 
-            if(type1.equals("BEV") && type2.equals("FCEV")) {
+            if (type1.equals("BEV") && type2.equals("FCEV")) {
                 carType = "FCEV";
             } else {
                 carType = type1;
