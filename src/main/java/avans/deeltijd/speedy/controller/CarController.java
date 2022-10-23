@@ -30,8 +30,19 @@ public class CarController {
         String licensePlate = resultCar.getLicensePlate();
         if (carRepository.findByLicensePlateIgnoringCase(licensePlate).isEmpty()) {
             Car apiCar = new Car(licensePlate);
-            if (apiCar.usesExternal()) {
-                resultCar = new Car(licensePlate);
+            switch (apiCar.getType(licensePlate)) {
+                case "ICE":
+                    resultCar = new ICE(licensePlate);
+                    break;
+                case "BEV":
+                    resultCar = new BEV(licensePlate);
+                    break;
+                case "FCEV":
+                    resultCar = new FCEV(licensePlate);
+                    break;
+                default:
+                    resultCar = new Car(licensePlate);
+                    break;
             }
             carRepository.save(resultCar);
             return ResponseEntity.ok(HttpStatus.CREATED);

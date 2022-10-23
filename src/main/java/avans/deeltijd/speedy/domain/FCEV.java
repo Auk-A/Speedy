@@ -12,7 +12,10 @@ public class FCEV extends Car {
     @Getter
     private final String carType = "Fuel cell electric vehicle";
 
+    public FCEV(String licensePlate) {
+        super(licensePlate);
+    }
+
     public FCEV() {
-        super();
     }
 }

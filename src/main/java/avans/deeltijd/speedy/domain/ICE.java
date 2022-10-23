@@ -15,7 +15,10 @@ public class ICE extends Car {
     private Engine engineType;
 
     public ICE(){
-        super();
+    }
+
+    public ICE(String licensePlate) {
+        super(licensePlate);
     }
 
     public ICE(Engine engineType) {

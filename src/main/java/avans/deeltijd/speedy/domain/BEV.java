@@ -12,7 +12,11 @@ public class BEV extends Car {
     @Getter
     private final String carType = "Battery electric vehicle";
 
+    public BEV(String licensePlate) {
+        super(licensePlate);
+    }
+
     public BEV() {
-        super();
+
     }
 }

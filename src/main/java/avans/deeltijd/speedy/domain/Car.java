@@ -68,6 +68,49 @@ public class Car {
         }
     }
 
+    public String getFuelDescription(JSONObject obj) {
+        String carType = null;
+        try {
+            switch (obj.getString("brandstof_omschrijving")) {
+                case "Elektriciteit":
+                    carType = "BEV";
+                    break;
+                case "Waterstof":
+                    carType = "FCEV";
+                    break;
+                default:
+                    carType = "ICE";
+                    break;
+            }
+        } catch (JSONException ignored){}
+        return carType;
+    }
+
+    public String getType(String licensePlate) {
+        String carType = "";
+        try {
+            String uri = "https://opendata.rdw.nl/resource/8ys7-d773.json?kenteken=" + licensePlate;
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getForObject(uri, String.class);
+            String carInfo = restTemplate.getForObject(uri, String.class);
+            JSONArray fuelInfo = new JSONArray(carInfo);
+            String type1 = getFuelDescription(fuelInfo.getJSONObject(0));
+            String type2 = "";
+            if(fuelInfo.length() > 1) {
+                type2 = getFuelDescription(fuelInfo.getJSONObject(1));
+            }
+
+            if(type1.equals("BEV") && type2.equals("FCEV")) {
+                carType = "FCEV";
+            } else {
+                carType = type1;
+            }
+
+        } catch (JSONException ignored) {
+        }
+        return carType;
+    }
+
     public Date getBuildDate(String dateString) throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
         return format.parse(dateString);
@@ -75,10 +118,5 @@ public class Car {
 
     public void rentCar() {
         this.rentedOut = true;
-    }
-
-    // If RDW API was used on initiation, returns true
-    public boolean usesExternal() {
-        return true;
     }
 }
