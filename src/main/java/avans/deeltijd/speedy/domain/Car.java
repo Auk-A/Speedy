@@ -48,10 +48,8 @@ public class Car {
 
             String uri = "https://opendata.rdw.nl/resource/m9d7-ebf2.json?kenteken=" + licensePlate;
             RestTemplate restTemplate = new RestTemplate();
-
             restTemplate.getForObject(uri, String.class);
             String carInfo = restTemplate.getForObject(uri, String.class);
-
             JSONArray json_arr = new JSONArray(carInfo);
             JSONObject obj = (JSONObject) json_arr.get(0);
 
@@ -87,14 +85,20 @@ public class Car {
         return carType;
     }
 
-    public static String getType(String licensePlate) {
-        String carType = "";
+    public static JSONArray getFuelInfo(String licensePlate) {
+        String carInfo;
         try {
             String uri = "https://opendata.rdw.nl/resource/8ys7-d773.json?kenteken=" + licensePlate;
             RestTemplate restTemplate = new RestTemplate();
             restTemplate.getForObject(uri, String.class);
-            String carInfo = restTemplate.getForObject(uri, String.class);
-            JSONArray fuelInfo = new JSONArray(carInfo);
+            carInfo = restTemplate.getForObject(uri, String.class);
+            return new JSONArray(carInfo);
+        } catch(JSONException ignored){return null;}
+    }
+
+    public static String getType(String licensePlate) throws JSONException {
+        JSONArray fuelInfo = getFuelInfo(licensePlate);
+        String carType = "";
             String type1 = getFuelDescription(fuelInfo.getJSONObject(0));
             String type2 = "";
             if (fuelInfo.length() > 1) {
@@ -106,9 +110,6 @@ public class Car {
             } else {
                 carType = type1;
             }
-
-        } catch (JSONException ignored) {
-        }
         return carType;
     }
 

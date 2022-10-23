@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Getter;
 
 import javax.persistence.Entity;
-import java.util.Date;
 
 @Entity
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
@@ -17,6 +16,5 @@ public class BEV extends Car {
     }
 
     public BEV() {
-
     }
 }

@@ -5,6 +5,7 @@ import avans.deeltijd.speedy.domain.BEV;
 import avans.deeltijd.speedy.domain.FCEV;
 import avans.deeltijd.speedy.domain.ICE;
 import avans.deeltijd.speedy.repository.CarRepository;
+import org.json.JSONException;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,7 @@ public class CarController {
 
     // Add a new car by license plate
     @PostMapping("/new")
-    public ResponseEntity<HttpStatus> createCar(@RequestParam String licensePlate) {
+    public ResponseEntity<HttpStatus> createCar(@RequestParam String licensePlate) throws JSONException {
         if (carRepository.findByLicensePlateIgnoringCase(licensePlate).isEmpty()) {
             Car addedCar;
             switch (Car.getType(licensePlate)) {
