@@ -7,10 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -29,6 +26,7 @@ public class Car {
     @Getter
     private String color;
     @Getter
+    @Column(name = "`VALUE`")
     private double value;
     @Getter
     private Date dateOfBuild;
@@ -38,10 +36,14 @@ public class Car {
     @Setter
     private boolean rentedOut;
 
+    public Car(String licensePlate) {
+        CreateCar(licensePlate);
+    }
+
     public Car() {
     }
 
-    public Car(String licensePlate) {
+    public void CreateCar(String licensePlate) {
         try {
 
             String uri = "https://opendata.rdw.nl/resource/m9d7-ebf2.json?kenteken=" + licensePlate;
@@ -75,7 +77,8 @@ public class Car {
         this.rentedOut = true;
     }
 
+    // If RDW API was used on initiation, returns true
     public boolean usesExternal() {
-        return false;
+        return true;
     }
 }

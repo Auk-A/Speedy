@@ -29,8 +29,6 @@ public class CarController {
     public ResponseEntity<HttpStatus> createCar(@RequestBody Car resultCar) {
         String licensePlate = resultCar.getLicensePlate();
         if (carRepository.findByLicensePlateIgnoringCase(licensePlate).isEmpty()) {
-
-
             Car apiCar = new Car(licensePlate);
             if (apiCar.usesExternal()) {
                 resultCar = new Car(licensePlate);

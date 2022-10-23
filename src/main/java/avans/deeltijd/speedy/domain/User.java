@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Entity
+@Entity(name = "`users`")
 @NoArgsConstructor
 public class User {
     @Id

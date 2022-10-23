@@ -1,5 +1,6 @@
 package avans.deeltijd.speedy;
 
+import avans.deeltijd.speedy.domain.Car;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
