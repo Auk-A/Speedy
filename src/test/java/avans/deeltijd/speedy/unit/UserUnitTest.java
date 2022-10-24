@@ -46,4 +46,21 @@ public class UserUnitTest {
         // THEN
         assertEquals(32, age);
     }
+
+    @Test
+    public void userAgeShouldBeCorrectWhenSameDay() {
+        // GIVEN
+        User user = new User(
+                "test",
+                "test",
+                "test@test.com",
+                LocalDate.now().minusYears(20)
+        );
+
+        // WHEN
+        Integer age = user.getAge();
+
+        // THEN
+        assertEquals(20, age);
+    }
 }
