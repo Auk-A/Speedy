@@ -10,7 +10,7 @@ public class Trip {
     private String licensePlate;
     private String pointPickUp;
     private String pointDropOff;
-    private double tripDuration;.
+    private double tripDuration;......
     private double tripDistance;
     private double tripPrice;
 
