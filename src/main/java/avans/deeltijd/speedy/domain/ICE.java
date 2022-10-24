@@ -31,6 +31,10 @@ public class ICE extends Car {
         String fuelType = currentFuelInfo.getString("brandstof_omschrijving");
         if (fuelType.equals("Benzine")) {
             this.engineType = Engine.PETROL.toString();
-        } else this.engineType = Engine.DIESEL.toString();
+        } else if (fuelType.equals("LPG")) {
+            this.engineType = Engine.LPG.toString();
+        } else {
+            this.engineType = Engine.DIESEL.toString();
+        }
     }
 }

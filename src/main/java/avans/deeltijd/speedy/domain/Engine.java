@@ -2,7 +2,8 @@ package avans.deeltijd.speedy.domain;
 
 public enum Engine {
     DIESEL,
-    PETROL;
+    PETROL,
+    LPG;
 
     @Override
     public String toString() {
@@ -11,6 +12,8 @@ public enum Engine {
                 return "Diesel";
             case PETROL:
                 return "Petrol";
+            case LPG:
+                return "LPG";
             default:
                 throw new IllegalArgumentException();
         }
