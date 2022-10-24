@@ -14,7 +14,6 @@ public class UserUnitTest {
 
     @Test
     public void instantiateUserGetUserAge_expectNotNull() {
-
         // GIVEN
         User user = new User(
                 "test",
