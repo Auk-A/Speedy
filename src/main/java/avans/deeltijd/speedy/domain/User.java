@@ -1,6 +1,7 @@
 package avans.deeltijd.speedy.domain;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
@@ -15,8 +16,8 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Setter(AccessLevel.NONE)
+    @Getter
+    @Setter
     private long id;
     @Size(min = 3, max = 15)
     @NotBlank(message = "First name is mandatory")
@@ -67,11 +68,6 @@ public class User {
         this.lastName = lastName;
         this.userEmail = userEmail;
         this.dateOfBirth = dateOfBirth;
-    }
-
-
-    public long getId() {
-        return id;
     }
 
     public String getUserEmail() {
