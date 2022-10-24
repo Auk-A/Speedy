@@ -2,8 +2,6 @@ package avans.deeltijd.speedy.domain;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,7 +10,6 @@ import org.json.JSONObject;
 import javax.persistence.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -29,7 +26,7 @@ public class Car {
     private String color;
     @Getter
     @Column(name = "`VALUE`")
-    private double value;
+    private int value;
     @Getter
     private Date dateOfBuild;
     @Getter

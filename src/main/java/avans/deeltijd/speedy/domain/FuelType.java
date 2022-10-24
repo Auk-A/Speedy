@@ -1,6 +1,6 @@
 package avans.deeltijd.speedy.domain;
 
-public enum Engine {
+public enum FuelType {
     DIESEL,
     PETROL,
     LPG;

@@ -15,26 +15,26 @@ public class ICE extends Car {
     @Getter
     private final String carType = "Internal combustion engine";
     @Getter
-    private String engineType;
+    private String fuelType;
 
     public ICE() {
     }
 
     public ICE(String licensePlate) throws JSONException {
         super(licensePlate);
-        setEngineType();
+        setFuelType();
     }
 
-    public void setEngineType() throws JSONException {
+    public void setFuelType() throws JSONException {
         JSONArray fuelInfo = Car.getFuelInfo(this.getLicensePlate());
         JSONObject currentFuelInfo = fuelInfo.getJSONObject(0);
         String fuelType = currentFuelInfo.getString("brandstof_omschrijving");
         if (fuelType.equals("Benzine")) {
-            this.engineType = Engine.PETROL.toString();
+            this.fuelType = FuelType.PETROL.toString();
         } else if (fuelType.equals("LPG")) {
-            this.engineType = Engine.LPG.toString();
+            this.fuelType = FuelType.LPG.toString();
         } else {
-            this.engineType = Engine.DIESEL.toString();
+            this.fuelType = FuelType.DIESEL.toString();
         }
     }
 }

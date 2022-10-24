@@ -1,23 +1,31 @@
 package avans.deeltijd.speedy.domain;
 
+import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity(name = "`USERS`")
 @NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Setter(AccessLevel.NONE)
     private long id;
+    @Size(min = 3, max = 15)
+    @NotBlank(message = "First name is mandatory")
+    public String firstName;
+    @NotBlank(message = "Email is mandatory")
     private String userEmail;
-    private String firstName;
     private String lastName;
+    @Size(min = 3, max = 30)
+    @NotBlank(message = "Last name is mandatory")
     private LocalDate dateOfBirth;
     private String street;
     private String houseNumber;
@@ -26,6 +34,8 @@ public class User {
     private String state;
     private String password;
     private LocalDateTime registrationDate;
+    @Transient //Is not persistent in DB.
+    private int age; //is calculated on get.
 
     public User(String userEmail,
                 String firstName,
@@ -50,6 +60,15 @@ public class User {
         this.password = password;
         this.registrationDate = registrationDate;
     }
+
+    //test constructor
+    public User(String firstName, String lastName, String userEmail, LocalDate dateOfBirth) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userEmail = userEmail;
+        this.dateOfBirth = dateOfBirth;
+    }
+
 
     public long getId() {
         return id;
@@ -129,5 +148,10 @@ public class User {
 
     public void setRegistrationDate(LocalDateTime registrationDate) {
         this.registrationDate = registrationDate;
+    }
+
+    //Calculates age with dateOfBirth on get.
+    public Integer getAge(){
+        return Period.between(this.dateOfBirth, LocalDate.now()).getYears();
     }
 }

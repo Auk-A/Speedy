@@ -2,20 +2,27 @@ package avans.deeltijd.speedy.domain;
 
 
 import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Trip {
+    @Id
     @Getter
-    private long id;
-    private String userId;
+    @Setter
+    private Long id;
+    private Long userId;
     private String licensePlate;
     private String pointPickUp;
     private String pointDropOff;
     private double tripDuration;
     private double tripDistance;
-    private double tripPrice;
+    private int tripPrice;
 
     // constructor
-    public Trip(long id, String userId, String licensePlate, String pointPickUp, String pointDropOff, double tripDuration, double tripDistance, double tripPrice) {
+    public Trip(Long id, Long userId, String licensePlate, String pointPickUp, String pointDropOff, double tripDuration, double tripDistance, int tripPrice) {
         this.id = id;
         this.userId = userId;
         this.licensePlate = licensePlate;
@@ -26,12 +33,16 @@ public class Trip {
         this.tripPrice = tripPrice;
     }
 
-    // Getters en setters
-    public void setId(long id) {
-        this.id = id;
+    public Trip() {
     }
 
-    public void setUserId(String userId) {
+    public Trip(Long userId, String licensePlate) {
+        this.userId = userId;
+        this.licensePlate = licensePlate;
+    }
+
+    // Getters en setters
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -47,7 +58,7 @@ public class Trip {
         return id;
     }
 
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
@@ -73,5 +84,10 @@ public class Trip {
 
     public double getTripPrice() {
         return tripPrice;
+    }
+
+    // Calculation
+    public void calculateTripPrice() {
+        return;
     }
 }
