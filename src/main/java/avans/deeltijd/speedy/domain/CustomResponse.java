@@ -8,4 +8,6 @@ public enum CustomResponse {
     NEW_USER_ADDED,
     INCORRECT_DATE_FORMAT,
     TRIP_STARTED,
+    RESERVATION_CREATED,
+    RESERVATION_FAILED,
 }

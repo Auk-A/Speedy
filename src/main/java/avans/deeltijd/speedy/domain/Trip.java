@@ -82,12 +82,7 @@ public class Trip {
         return tripDistance;
     }
 
-    public double getTripPrice() {
+    public int getTripPrice() {
         return tripPrice;
-    }
-
-    // Calculation
-    public void calculateTripPrice() {
-        return;
     }
 }

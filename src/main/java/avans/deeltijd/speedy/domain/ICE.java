@@ -38,4 +38,8 @@ public class ICE extends Car {
             this.fuelType = FuelType.DIESEL.toString();
         }
     }
+
+    public int totalCostOfOwnership() {
+        return 1;
+    }
 }

@@ -17,4 +17,8 @@ public class FCEV extends Car {
 
     public FCEV() {
     }
+
+    public int totalCostOfOwnership() {
+        return 3;
+    }
 }
