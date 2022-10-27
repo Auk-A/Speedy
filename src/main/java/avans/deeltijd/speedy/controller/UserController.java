@@ -37,9 +37,14 @@ public class UserController {
         } catch(Exception ignore) {
             return new ResponseEntity<>("Date format incorrect: Should be dd-MM-yyyy", HttpStatus.CONFLICT);
         }
-        User createdUser = new User(first_name, last_name, user_email, dateOfBirth);
-        userRepository.save(createdUser);
-        return new ResponseEntity<>("New user created", HttpStatus.CREATED);
+        try {
+            User createdUser = new User(first_name, last_name, user_email, dateOfBirth);
+            userRepository.save(createdUser);
+            return new ResponseEntity<>("New user created", HttpStatus.CREATED);
+        } catch(Exception ignore) {
+            return new ResponseEntity<>("User already exists", HttpStatus.CONFLICT);
+        }
+
     }
 
 }
