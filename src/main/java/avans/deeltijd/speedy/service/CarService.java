@@ -1,15 +1,14 @@
 package avans.deeltijd.speedy.service;
 
-import avans.deeltijd.speedy.domain.BEV;
-import avans.deeltijd.speedy.domain.Car;
-import avans.deeltijd.speedy.domain.FCEV;
-import avans.deeltijd.speedy.domain.ICE;
+import avans.deeltijd.speedy.domain.*;
 import avans.deeltijd.speedy.repository.CarRepository;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.client.HttpStatusCodeException;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,12 +24,12 @@ public class CarService {
         this.carRepository = carRepository;
     }
 
-    public ResponseEntity newCar(String license_plate) throws JSONException {
+    public CustomResponse newCar(String license_plate) throws JSONException {
         if (carRepository.findByLicensePlateIgnoringCase(license_plate).isEmpty()) {
             Car addedCar;
             String carType = Car.getType(license_plate);
             if (carType == null) {
-                return new ResponseEntity<>("License plate not found", HttpStatus.CONFLICT);
+                return CustomResponse.PLATE_NOT_FOUND;
             }
             switch (carType) {
                 case "ICE":
@@ -43,12 +42,12 @@ public class CarService {
                     addedCar = new FCEV(license_plate);
                     break;
                 default:
-                    return new ResponseEntity<>("Unknown car", HttpStatus.CONFLICT);
+                    return CustomResponse.PLATE_NOT_FOUND;
             }
             carRepository.save(addedCar);
-            return new ResponseEntity<>("New car added", HttpStatus.CREATED);
+            return CustomResponse.NEW_CAR_ADDED;
         } else {
-            return new ResponseEntity<>("Car has already been added", HttpStatus.CONFLICT);
+            return CustomResponse.CAR_ALREADY_EXISTS;
         }
     }
 
@@ -85,7 +84,7 @@ public class CarService {
         }
 
         // Filter amount of seats
-        if (min_capacity > 0 || min_capacity < 2147483647) {
+        if (min_capacity > 0) {
             found = found.stream()
                     .filter(car -> min_capacity <= car.getPaxCapacity())
                     .collect(Collectors.toList());
