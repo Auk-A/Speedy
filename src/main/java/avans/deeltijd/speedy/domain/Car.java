@@ -47,7 +47,6 @@ public class Car {
 
             String uri = "https://opendata.rdw.nl/resource/m9d7-ebf2.json?kenteken=" + licensePlate;
             RestTemplate restTemplate = new RestTemplate();
-            restTemplate.getForObject(uri, String.class);
             String carInfo = restTemplate.getForObject(uri, String.class);
             JSONArray json_arr = new JSONArray(carInfo);
             JSONObject obj = (JSONObject) json_arr.get(0);
