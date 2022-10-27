@@ -9,12 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @RestController
-@RequestMapping("/User")
+@RequestMapping("/user")
 public class UserController {
     private final UserRepository userRepository;
 
@@ -25,21 +24,26 @@ public class UserController {
     // Add a new user
     @PostMapping("/new")
     public ResponseEntity createUser(
-        @RequestParam String first_name,
-        @RequestParam String last_name,
-        @RequestParam String user_email,
-        @RequestParam String date_of_birth
-    ) throws ParseException {
+            @RequestParam String first_name,
+            @RequestParam String last_name,
+            @RequestParam String user_email,
+            @RequestParam String date_of_birth
+    ) {
         LocalDate dateOfBirth;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         try {
             dateOfBirth = LocalDate.parse(date_of_birth, formatter);
-        } catch(Exception ignore) {
+        } catch (Exception ignore) {
             return new ResponseEntity<>("Date format incorrect: Should be dd-MM-yyyy", HttpStatus.CONFLICT);
         }
-        User createdUser = new User(first_name, last_name, user_email, dateOfBirth);
-        userRepository.save(createdUser);
-        return new ResponseEntity<>("New user created", HttpStatus.CREATED);
+        try {
+            User createdUser = new User(first_name, last_name, user_email, dateOfBirth);
+            userRepository.save(createdUser);
+            return new ResponseEntity<>("New user created", HttpStatus.CREATED);
+        } catch (Exception ignore) {
+            return new ResponseEntity<>("User already exists", HttpStatus.CONFLICT);
+        }
+
     }
 
 }

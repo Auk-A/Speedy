@@ -63,4 +63,37 @@ public class UserUnitTest {
         // THEN
         assertEquals(20, age);
     }
+
+    @Test
+    public void userAgeShouldBeCorrectWhenOneDayBefore() {
+        // GIVEN
+        User user = new User(
+                "test",
+                "test",
+                "test@test.com",
+                LocalDate.now().minusYears(20).minusDays(1)
+        );
+
+        // WHEN
+        Integer age = user.getAge();
+
+        // THEN
+        assertEquals(20, age);
+    }
+    @Test
+    public void userAgeShouldBeCorrectWhenOneDayAfter() {
+        // GIVEN
+        User user = new User(
+                "test",
+                "test",
+                "test@test.com",
+                LocalDate.now().minusYears(20).plusDays(1)
+        );
+
+        // WHEN
+        Integer age = user.getAge();
+
+        // THEN
+        assertEquals(19, age);
+    }
 }
