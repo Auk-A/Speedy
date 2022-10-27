@@ -17,7 +17,6 @@ public class ReservationUnitTest {
     public void userAgeShouldBeCorrectWhenOneDayAfter() {
         // GIVEN
         Reservation reservation = new Reservation(
-                1,
                 "R907BZ",
                 1,
                 LocalDate.parse ("27-10-2022", df),
