@@ -84,7 +84,7 @@ public class CarService {
         }
 
         // Filter amount of seats
-        if (min_capacity > 0 || min_capacity < 2147483647) {
+        if (min_capacity > 0) {
             found = found.stream()
                     .filter(car -> min_capacity <= car.getPaxCapacity())
                     .collect(Collectors.toList());

@@ -2,7 +2,6 @@ package avans.deeltijd.speedy.controller;
 
 import avans.deeltijd.speedy.domain.Car;
 import avans.deeltijd.speedy.service.CarService;
-import org.apache.coyote.Response;
 import org.json.JSONException;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
