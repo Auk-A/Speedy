@@ -63,6 +63,7 @@ public class CarController {
             @RequestParam(required = false) String color,
             @RequestParam(required = false, defaultValue = "0") int min_value,
             @RequestParam(required = false, defaultValue = "2147483647") int max_value,
+            @RequestParam(required = false, defaultValue = "0") int min_capacity,
             @RequestParam(required = false, defaultValue = "1900-01-01") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE, fallbackPatterns = {"yyyy"}) Date min_build_date,
             @RequestParam(required = false, defaultValue = "2100-01-01") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE, fallbackPatterns = {"yyyy"}) Date max_build_date
     ) {
@@ -94,6 +95,13 @@ public class CarController {
             found = found.stream()
                     .filter(car -> min_value <= car.getValue())
                     .filter(car -> max_value >= car.getValue())
+                    .collect(Collectors.toList());
+        }
+
+        // Filter amount of seats
+        if (min_capacity > 0 || min_capacity < 2147483647) {
+            found = found.stream()
+                    .filter(car -> min_capacity <= car.getPaxCapacity())
                     .collect(Collectors.toList());
         }
 
