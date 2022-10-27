@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
-public class Car {
+public abstract class Car {
     @Id
     @Getter
     @Setter

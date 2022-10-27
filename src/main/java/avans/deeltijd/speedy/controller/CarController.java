@@ -46,8 +46,7 @@ public class CarController {
                     addedCar = new FCEV(license_plate);
                     break;
                 default:
-                    addedCar = new Car(license_plate);
-                    break;
+                    return new ResponseEntity<>("Unknown car", HttpStatus.CONFLICT);
             }
             carRepository.save(addedCar);
             return new ResponseEntity<>("New car added", HttpStatus.CREATED);

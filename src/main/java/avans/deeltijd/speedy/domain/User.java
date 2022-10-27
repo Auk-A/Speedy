@@ -18,21 +18,43 @@ public class User {
     @Getter
     @Setter
     private long id;
-    @Size(min = 3, max = 15)
+    @Getter
+    @Setter
     @NotBlank(message = "First name is mandatory")
+    @Size(min = 3, max = 15)
     public String firstName;
+    @Getter
+    @Setter
     @NotBlank(message = "Email is mandatory")
     private String userEmail;
-    private String lastName;
+    @Getter
+    @Setter
     @Size(min = 3, max = 30)
     @NotBlank(message = "Last name is mandatory")
+    private String lastName;
+    @Getter
+    @Setter
     private LocalDate dateOfBirth;
+    @Getter
+    @Setter
     private String street;
+    @Getter
+    @Setter
     private String houseNumber;
+    @Getter
+    @Setter
     private String postalCode;
+    @Getter
+    @Setter
     private String city;
+    @Getter
+    @Setter
     private String state;
+    @Getter
+    @Setter
     private String password;
+    @Getter
+    @Setter
     private LocalDateTime registrationDate;
     @Transient //Is not persistent in DB.
     private int age; //is calculated on get.
@@ -69,84 +91,9 @@ public class User {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getUserEmail() {
-        return userEmail;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public String getHouseNumber() {
-        return houseNumber;
-    }
-
-    public String getPostalCode() {
-        return postalCode;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public LocalDateTime getRegistrationDate() {
-        return registrationDate;
-    }
-
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public void setHouseNumber(String houseNumber) {
-        this.houseNumber = houseNumber;
-    }
-
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setRegistrationDate(LocalDateTime registrationDate) {
-        this.registrationDate = registrationDate;
-    }
-
     //Calculates age with dateOfBirth on get.
     public Integer getAge(){
-        return Period.between(this.dateOfBirth, LocalDate.now()).getYears();
+        this.age = Period.between(this.dateOfBirth, LocalDate.now()).getYears();
+        return this.age;
     }
 }
