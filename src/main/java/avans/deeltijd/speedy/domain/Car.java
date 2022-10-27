@@ -1,5 +1,6 @@
 package avans.deeltijd.speedy.domain;
 
+import avans.deeltijd.speedy.service.CarService;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.client.RestTemplate;
@@ -9,7 +10,6 @@ import org.json.JSONObject;
 
 import javax.persistence.*;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -57,19 +57,16 @@ public abstract class Car {
             this.model = obj.getString("handelsbenaming");
             this.color = obj.getString("eerste_kleur");
             this.value = obj.getInt("catalogusprijs");
-            this.dateOfBuild = getBuildDate(obj.getString("datum_eerste_toelating"));
+            this.dateOfBuild = CarService.getBuildDate(obj.getString("datum_eerste_toelating"));
             this.paxCapacity = obj.getInt("aantal_zitplaatsen");
 
         } catch (ParseException | JSONException ignored) {
         }
     }
 
-    public Date getBuildDate(String dateString) throws ParseException {
-        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
-        return format.parse(dateString);
-    }
-
     public void rentCar() {
         this.rentedOut = true;
     }
+
+    public abstract int totalCostOfOwnership();
 }

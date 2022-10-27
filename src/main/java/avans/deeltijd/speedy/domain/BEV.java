@@ -17,4 +17,8 @@ public class BEV extends Car {
 
     public BEV() {
     }
+
+    public int totalCostOfOwnership() {
+        return 2;
+    }
 }

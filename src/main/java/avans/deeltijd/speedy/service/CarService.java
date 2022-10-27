@@ -13,6 +13,8 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -160,5 +162,10 @@ public class CarService {
             carType = type1;
         }
         return carType;
+    }
+
+    public static Date getBuildDate(String dateString) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        return format.parse(dateString);
     }
 }
