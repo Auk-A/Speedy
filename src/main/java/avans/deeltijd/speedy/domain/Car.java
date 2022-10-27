@@ -64,56 +64,6 @@ public abstract class Car {
         }
     }
 
-    public static String getFuelDescription(JSONObject obj) {
-        String carType = null;
-        try {
-            switch (obj.getString("brandstof_omschrijving")) {
-                case "Elektriciteit":
-                    carType = "BEV";
-                    break;
-                case "Waterstof":
-                    carType = "FCEV";
-                    break;
-                default:
-                    carType = "ICE";
-                    break;
-            }
-        } catch (JSONException ignored) {
-        }
-        return carType;
-    }
-
-    public static JSONArray getFuelInfo(String licensePlate) {
-        String carInfo;
-        try {
-            String uri = "https://opendata.rdw.nl/resource/8ys7-d773.json?kenteken=" + licensePlate;
-            RestTemplate restTemplate = new RestTemplate();
-            restTemplate.getForObject(uri, String.class);
-            carInfo = restTemplate.getForObject(uri, String.class);
-            return new JSONArray(carInfo);
-        } catch(JSONException ignored){return null;}
-    }
-
-    public static String getType(String licensePlate) throws JSONException {
-        JSONArray fuelInfo = getFuelInfo(licensePlate);
-        if(fuelInfo.length() == 0) {
-            return null;
-        }
-        String carType = "";
-            String type1 = getFuelDescription(fuelInfo.getJSONObject(0));
-            String type2 = "";
-            if (fuelInfo.length() > 1) {
-                type2 = getFuelDescription(fuelInfo.getJSONObject(1));
-            }
-
-            if (type1.equals("BEV") && type2.equals("FCEV")) {
-                carType = "FCEV";
-            } else {
-                carType = type1;
-            }
-        return carType;
-    }
-
     public Date getBuildDate(String dateString) throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
         return format.parse(dateString);

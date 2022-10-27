@@ -1,5 +1,6 @@
 package avans.deeltijd.speedy.domain;
 
+import avans.deeltijd.speedy.service.CarService;
 import lombok.Getter;
 
 import javax.persistence.Entity;
@@ -26,7 +27,7 @@ public class ICE extends Car {
     }
 
     public void setFuelType() throws JSONException {
-        JSONArray fuelInfo = Car.getFuelInfo(this.getLicensePlate());
+        JSONArray fuelInfo = CarService.getFuelInfo(this.getLicensePlate());
         JSONObject currentFuelInfo = fuelInfo.getJSONObject(0);
         String fuelType = currentFuelInfo.getString("brandstof_omschrijving");
         if (fuelType.equals("Benzine")) {

@@ -1,9 +1,6 @@
 package avans.deeltijd.speedy.controller;
 
-import avans.deeltijd.speedy.domain.User;
-import avans.deeltijd.speedy.repository.UserRepository;
 import avans.deeltijd.speedy.service.UserService;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

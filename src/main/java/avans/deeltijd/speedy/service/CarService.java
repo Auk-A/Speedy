@@ -2,13 +2,16 @@ package avans.deeltijd.speedy.service;
 
 import avans.deeltijd.speedy.domain.*;
 import avans.deeltijd.speedy.repository.CarRepository;
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.client.HttpStatusCodeException;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,7 +30,7 @@ public class CarService {
     public CustomResponse newCar(String license_plate) throws JSONException {
         if (carRepository.findByLicensePlateIgnoringCase(license_plate).isEmpty()) {
             Car addedCar;
-            String carType = Car.getType(license_plate);
+            String carType = CarService.getType(license_plate);
             if (carType == null) {
                 return CustomResponse.PLATE_NOT_FOUND;
             }
@@ -106,5 +109,56 @@ public class CarService {
         }
 
         return found;
+    }
+
+
+    public static String getFuelDescription(JSONObject obj) {
+        String carType = null;
+        try {
+            switch (obj.getString("brandstof_omschrijving")) {
+                case "Elektriciteit":
+                    carType = "BEV";
+                    break;
+                case "Waterstof":
+                    carType = "FCEV";
+                    break;
+                default:
+                    carType = "ICE";
+                    break;
+            }
+        } catch (JSONException ignored) {
+        }
+        return carType;
+    }
+
+    public static JSONArray getFuelInfo(String licensePlate) {
+        String carInfo;
+        try {
+            String uri = "https://opendata.rdw.nl/resource/8ys7-d773.json?kenteken=" + licensePlate;
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getForObject(uri, String.class);
+            carInfo = restTemplate.getForObject(uri, String.class);
+            return new JSONArray(carInfo);
+        } catch(JSONException ignored){return null;}
+    }
+
+    public static String getType(String licensePlate) throws JSONException {
+        JSONArray fuelInfo = getFuelInfo(licensePlate);
+        if(fuelInfo.length() == 0) {
+            return null;
+        }
+        String carType = "";
+        String type1 = getFuelDescription(fuelInfo.getJSONObject(0));
+        String type2 = "";
+        if (fuelInfo.length() > 1) {
+            type2 = getFuelDescription(fuelInfo.getJSONObject(1));
+        }
+
+        if (type1.equals("BEV") && type2.equals("FCEV")) {
+            carType = "FCEV";
+        } else {
+            carType = type1;
+        }
+        return carType;
     }
 }
