@@ -1,20 +1,14 @@
 package avans.deeltijd.speedy.service;
 
-import avans.deeltijd.speedy.domain.Car;
 import avans.deeltijd.speedy.domain.CustomResponse;
 import avans.deeltijd.speedy.domain.Reservation;
-import avans.deeltijd.speedy.domain.Trip;
-import avans.deeltijd.speedy.repository.CarRepository;
 import avans.deeltijd.speedy.repository.ReservationRepository;
-import avans.deeltijd.speedy.repository.TripRepository;
-import avans.deeltijd.speedy.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ReservationService {
-    @Autowired
     private final ReservationRepository reservationRepository;
 
     public ReservationService(ReservationRepository reservationRepository) {
