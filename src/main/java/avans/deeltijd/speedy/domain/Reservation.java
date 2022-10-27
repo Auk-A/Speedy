@@ -29,4 +29,12 @@ public class Reservation {
     @Setter
     private LocalDate endDate;
 
+    public Reservation(long reservationNumber, String licensePlate, long userId, LocalDate reservationDate, LocalDate startDate, LocalDate endDate) {
+        this.reservationNumber = reservationNumber;
+        this.licensePlate = licensePlate;
+        this.userId = userId;
+        this.reservationDate = reservationDate;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
 }
