@@ -82,8 +82,7 @@ public class User {
         this.password = password;
         this.registrationDate = registrationDate;
     }
-
-    //test constructor
+    
     public User(String firstName, String lastName, String userEmail, LocalDate dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;
