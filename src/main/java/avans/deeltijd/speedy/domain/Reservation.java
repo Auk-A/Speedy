@@ -2,6 +2,7 @@ package avans.deeltijd.speedy.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -10,19 +11,22 @@ import java.time.LocalDate;
 public class Reservation {
     @Id
     @Getter
+    @Setter
     private long reservationNumber;
+    @Autowired
     @Getter
     private String licensePlate;
+    @Autowired
     @Getter
     private long userId;
-    @Setter
     @Getter
+    @Setter
     private LocalDate reservationDate;
-    @Setter
     @Getter
+    @Setter
     private LocalDate startDate;
-    @Setter
     @Getter
+    @Setter
     private LocalDate endDate;
 
 }
