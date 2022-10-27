@@ -1,23 +1,14 @@
 package avans.deeltijd.speedy.controller;
 
 import avans.deeltijd.speedy.domain.Car;
-import avans.deeltijd.speedy.domain.BEV;
-import avans.deeltijd.speedy.domain.FCEV;
-import avans.deeltijd.speedy.domain.ICE;
-import avans.deeltijd.speedy.repository.CarRepository;
 import avans.deeltijd.speedy.service.CarService;
-import org.apache.coyote.Response;
 import org.json.JSONException;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/car")
