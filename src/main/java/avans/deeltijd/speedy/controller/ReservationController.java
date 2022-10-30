@@ -34,7 +34,7 @@ public class ReservationController {
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE, fallbackPatterns = {"yyyy"}) LocalDate end_date) {
 
         return switch(reservationService.newReservation(user_id, license_plate, start_date, end_date)) {
-            case RESERVATION_FAILED -> new ResponseEntity<>("New reservation has been created", HttpStatus.CONFLICT);
+            case RESERVATION_FAILED -> new ResponseEntity<>("Reservation could not be created", HttpStatus.CONFLICT);
             case RESERVATION_CREATED -> new ResponseEntity<>("Reservation has been created", HttpStatus.CREATED);
             default -> new ResponseEntity<>("Something went wrong. Contact system administrator. ", HttpStatus.CONFLICT);
         };
