@@ -27,14 +27,14 @@ public class ReservationController {
             @RequestParam Long user_id,
             @RequestParam String license_plate,
             @RequestParam
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE, fallbackPatterns = {"yyyy"}) LocalDate start_date,
+            @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate start_date,
             @RequestParam
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE, fallbackPatterns = {"yyyy"}) LocalDate end_date) {
+            @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate end_date) {
 
         return switch(reservationService.newReservation(user_id, license_plate, start_date, end_date)) {
             case RESERVATION_FAILED -> new ResponseEntity<>("Reservation could not be created", HttpStatus.CONFLICT);
             case RESERVATION_CREATED -> new ResponseEntity<>("Reservation has been created", HttpStatus.CREATED);
-            default -> new ResponseEntity<>("Something went wrong. Contact system administrator. ", HttpStatus.CONFLICT);
+            default -> new ResponseEntity<>("Reservation could not be created. Contact system administrator. ", HttpStatus.CONFLICT);
         };
     }
 }
