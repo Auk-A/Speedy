@@ -1,6 +1,12 @@
 # Speedy
 
-## Add a new user
+[[POST] Add a new user](#add-user)
+
+[[POST] Add a new car](#add-car)
+
+[[POST] Create a new reservation](#add-reservation)
+
+## <a name="add-user"></a>Add a new user
 
 Adds a new user based on the given first name, last name, email and date of birth. 
 
@@ -28,7 +34,7 @@ Adds a new user based on the given first name, last name, email and date of birt
 }
 ```
 
-## Add a new car
+## <a name="add-car"></a>Add a new car
 
 Adds a new car based on the given license plate. 
 
@@ -50,9 +56,9 @@ Adds a new car based on the given license plate.
 }
 ```
 
-## Create a new reservation
+## <a name="add-reservation"></a>Create a new reservation
 
-Creates a new reservation for a user with the given user ID and car license plate, with the specified start and end dates.
+Create a new reservation for a user with the given user ID and car license plate, with the specified start and end dates.
 
 ### Request
 
@@ -60,12 +66,12 @@ Creates a new reservation for a user with the given user ID and car license plat
 
 #### Request Body
 
-| Parameter  | Type   | Description                            |
-| ---------- | ------ | -------------------------------------- |
-| user_id    | long   | ID of the user making the reservation  |
-| license_plate  | string | License plate of the car being reserved |
-| start_date | string | Start date of the reservation (format: dd-MM-yyyy) |
-| end_date | string | End date of the reservation (format: dd-MM-yyyy) |
+| Parameter      | Type   | Description                                        |
+| ----------     | ------ | -------------------------------------------------- |
+| user_id        | long   | ID of the user making the reservation              |
+| license_plate  | string | License plate of the car being reserved            |
+| start_date     | string | Start date of the reservation (format: dd-MM-yyyy) |
+| end_date       | string | End date of the reservation (format: dd-MM-yyyy)   |
 
 #### Example
 
